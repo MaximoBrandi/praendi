@@ -35,7 +35,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="/assets/img/logo/logo.png" alt="">
+                    <img src="/assets/img/logo/LogoA80.png" alt="">
                 </div>
             </div>
         </div>
@@ -71,7 +71,7 @@
                             <!-- Logo -->
                             <div class="col-xl-3 col-lg-3 col-md-3 d-none d-md-block">
                                 <div class="logo">
-                                    <a href="/"><img src="/assets/img/logo/logo.png" alt=""></a>
+                                    <a href="/"><img src="/assets/img/logo/Logo57.png" alt=""></a>
                                 </div>
                             </div>
                             <!-- Ad -->
@@ -90,7 +90,7 @@
                             <div class="col-xl-7 col-lg-7 col-md-11 header-flex">
                                 <!-- sticky -->
                                 <div class="sticky-logo">
-                                    <a href="/"><img src="/assets/img/logo/logo.png" alt=""></a>
+                                    <a href="/"><img src="/assets/img/logo/Logo57.png" alt=""></a>
                                 </div>
                                 <!-- Main-menu -->
                                 <div class="main-menu d-none d-md-block">
@@ -98,7 +98,7 @@
                                         <ul id="navigation">
                                             <li><a href="/">Home</a></li>
                                             <li><a href="/category">Category</a></li>
-                                            <li><a href="https://linktr.ee/maximoprandi">About me</a></li>
+                                            <li><a target="_blank" href="https://linktr.ee/maximoprandi">About me</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -146,7 +146,7 @@
                                 <div class="single-footer-caption mb-30">
                                     <!-- logo -->
                                     <div class="footer-logo">
-                                        <a href="/"><img src="/assets/img/logo/logo2_footer.png" alt=""></a>
+                                        <a href="/"><img src="/assets/img/logo/LogoW70.png" alt=""></a>
                                     </div>
                                     <div class="footer-tittle">
                                         <div class="footer-pera">
@@ -170,7 +170,9 @@
                         <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
                             <div class="single-footer-caption mb-50">
                                 <div class="banner">
-                                    <img src="/assets/img/gallery/body_card4.png" alt="">
+                                    <a target="_blank" href="https://larn.curseofacademy.com.ar">
+                                        <img src="/assets/img/gallery/body_card4.png" style="border-radius:4%;" alt="">
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -185,7 +187,7 @@
                             <div class="col-xl-12 ">
                                 <div class="footer-copy-right text-center">
                                     <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | <a href="https://maximoprandi.tech" target="_blank">M&P </a> | <a href="https://colorlib.com" target="_blank">Colorlib</a>
     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                                 </div>
                             </div>

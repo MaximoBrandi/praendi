@@ -22,6 +22,10 @@ Route::controller(Controller::class)->group(function () {
 
     Route::get('/category/{id}', 'categorySearch');
 
+    Route::post('/category', 'categoryPOST');
+
+    Route::post('/category/{id}', 'categoryPOST');
+
     Route::get('/post/{id}', 'post');
 
     Route::get('/profile', 'profile')->name('profile');
