@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Web3LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,16 @@ Route::controller(Controller::class)->group(function () {
 
     Route::get('/profile', 'profile')->name('profile');
 
+    Route::get('/login', 'login')->name('login');
+
+    Route::get('/register', 'register')->name('register');
 });
+
+Route::controller(Web3LoginController::class)->group(function () {
+
+    Route::get('/web3-login-message', 'message');
+
+    Route::post('/web3-login-verify', 'verify');
+
+});
+

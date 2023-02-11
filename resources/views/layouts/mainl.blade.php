@@ -1,5 +1,6 @@
 @php
     use Illuminate\Pagination\Paginator;
+    use Illuminate\Support\Facades\Auth;
 @endphp
 
 <!DOCTYPE html>
@@ -115,7 +116,11 @@
                                     </ul>
                                     <!-- Search Nav -->
                                     <div class="nav-search">
-                                        <i onclick="location.href='{{ route('profile') }}'" class="fa fa-user"></i>
+                                        @if (Auth::user())
+                                            <i onclick="location.href='{{ route('profile') }}'" class="fa fa-user"></i>
+                                        @else
+                                            <i onclick="location.href='{{ route('login') }}'" class="fa fa-user"></i>
+                                        @endif
                                     <div class="nav-search search-switch">
                                         <i class="fa fa-search"></i>
                                     </div>
