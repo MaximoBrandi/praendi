@@ -2,7 +2,28 @@
 
 @section('customSectionClass', ' single-post-area ')
 
+
 @section('content')
+    <script>
+        async function deleteComment(id) {
+            response = await fetch('/post', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'comment': id,
+                '_token': '{{ csrf_token() }}'
+            })
+            });
+            const data = await response.text();
+
+            if (data) {
+                location.reload();
+            }
+        }
+    </script>
+
     <div class="col-lg-8 posts-list">
         <div class="single-post">
            <div class="feature-img">
@@ -111,13 +132,12 @@
 
         <div class="blog-author">
            <div class="media align-items-center">
-              <img width="70px" height="70px" style="border-radius:50%" src="{{$postID->user->pfp}}" alt="">
+              <img width="70px" height="70px" style="border-radius:50%" src="{{'/storage/'.$postID->user->profile->pfp}}" alt="">
               <div class="media-body">
                  <a href="/profile/{{$postID->user->id}}">
-                    <h4>{{$postID->user->name}}</h4>
+                    <h4>{{$postID->user->profile->name}}</h4>
                  </a>
-                 <p>Second divided from form fish beast made. Every of seas all gathered use saying you're, he
-                    our dominion twon Second divided from</p>
+                 <p>{{$postID->user->profile->bio}}</p>
               </div>
            </div>
         </div>
@@ -130,21 +150,21 @@
                 <div class="single-comment justify-content-between d-flex">
                 <div class="user justify-content-between d-flex">
                     <div class="thumb">
-                        <img src="{{$comment->user->pfp}}" alt="">
+                        <img src="/storage/{{$comment->user->profile->pfp}}" alt="">
                     </div>
                     <div class="desc">
                         <p class="comment">
-                            {{$comment->content}}
+                            {{$comment->comment}}
                         </p>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex align-items-center">
                             <h5>
-                                <a href="/profile/{{$comment->user->id}}">{{$comment->user->name}}</a>
+                                <a href="/profile/{{$comment->user->id}}">{{$comment->user->profile->name}}</a>
                             </h5>
-                            <p class="date">{{$comment->created_at}} </p>
+                                <p class="date">{{$comment->created_at}} </p>
                             </div>
                             <div class="reply-btn">
-                            <a href="#" class="btn-reply text-uppercase">reply</a>
+                                <a style="cursor: pointer" onclick="deleteComment({{$comment->id}})" class="btn-reply text-uppercase">delete</a>
                             </div>
                         </div>
                     </div>
@@ -158,7 +178,8 @@
         <div class="comment-form">
             @if (Auth::user())
                 <h4>Leave a Reply</h4>
-                <form class="form-contact comment_form" action="#" id="commentForm">
+                <form method="post" class="form-contact comment_form" action="/post/{{$postID->id}}" id="commentForm">
+                    @csrf
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">

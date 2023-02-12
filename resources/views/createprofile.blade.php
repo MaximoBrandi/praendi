@@ -79,13 +79,14 @@
                   <p class="mb-0">Create your new profile so everyone could know you better</p>
                 </div>
                 <div class="card-body">
-                  <form method="post" action="{{ route('profile')}}" role="form">
+                  <form enctype="multipart/form-data" method="post" action="{{ route('profile')}}" role="form">
+                    @csrf
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Username</label>
-                      <input name="username" type="text" class="form-control">
+                      <input name="name" type="text" class="form-control">
                     </div>
                     <div class="input-group input-group-outline mb-3">
-                      <textarea name="wallet" placeholder="Biography" type="text" class="form-control"></textarea>
+                      <textarea name="bio" placeholder="Biography" type="text" class="form-control"></textarea>
                     </div>
                     <div class="input-group">
                         <label>Upload a profile photo</label>
@@ -100,9 +101,15 @@
                       </label>
                     </div>
                     <div class="text-center">
-                      <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Continue</button>
+                      <input type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" value="Continue">
                     </div>
                   </form>
+
+                    @isset($errors)
+                        @php
+                            foreach ($errors->all() as $message) {echo $message;}
+                        @endphp
+                    @endisset
                 </div>
               </div>
             </div>

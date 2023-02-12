@@ -8,8 +8,10 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Validator;
+use App\Models\Profile;
 use App\Models\Post;
+use App\Models\Comment;
 
 class Controller extends BaseController
 {
@@ -125,13 +127,83 @@ class Controller extends BaseController
 
     public function profile(){
         if(Auth::user()){
-            if(property_exists(Auth::user(), 'name')){
-                return view('profile');
+            if(Auth::user()->profile){
+
+
+                return view('profile', ['profile' => Auth::user()->profile]);
             }else{
                 return view('createprofile');
             }
         }else{
             return redirect()->back($status = 302);
+        }
+    }
+
+    public function createprofile(Request $request){
+        $validator = Validator::make($request->all(), [
+            'photo' => 'required|image|dimensions:ratio=1/1|max:1024',
+            'name' => ['required','string', 'max:255'],
+            'bio' => ['required','string', 'max:255'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }else{
+            $Profile = new Profile;
+            $Profile->user_id = Auth::user()->id;
+
+            if(isset($request->photo)){
+                $Profile->pfp = $request->photo->storeAs(
+                    'photo', Auth::user()->id
+                );
+            }
+
+            if(isset($request->name)){
+                $Profile->name = $request->name;
+            }
+            if(isset($request->bio)){
+                $Profile->bio = $request->bio;
+            }
+
+            $Profile->save();
+
+            return redirect('profile');
+        }
+    }
+
+    public function logout(Request $request){
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
+
+    public function comment(Request $request, $id){
+        $validate = $request->validate([
+            'comment' => ['required', 'string', 'max:60'],
+        ]);
+
+        if($validate){
+            if($request->comment){
+                Comment::create([
+                    'user_id' => Auth::user()->id,
+                    'post_id' => $id,
+                    'comment' => filter_var($request->comment, FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH),
+                ]);
+            }
+        }
+
+        return redirect()->back();
+    }
+
+    public function postactions(Request $request){
+        if((Comment::find($request->comment)->user->id) == Auth::user()->id){
+            Comment::find($request->comment)->delete();
         }
     }
 }

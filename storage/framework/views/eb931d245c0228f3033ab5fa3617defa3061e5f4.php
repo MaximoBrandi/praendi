@@ -99,7 +99,7 @@
                                         <ul id="navigation">
                                             <li><a href="/">Home</a></li>
                                             <li><a href="/category">Category</a></li>
-                                            <li><a target="_blank" href="https://linktr.ee/maximoprandi">About me</a></li>
+                                            <li><a href="<?php echo e(route('about')); ?>">Prændi</a></li>
                                         </ul>
                                     </nav>
                                 </div>

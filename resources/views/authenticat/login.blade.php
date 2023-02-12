@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
   <title>
     Praendi
   </title>
@@ -52,7 +52,9 @@
         });
         const data = await response.text();
 
-        console.log(data);
+        if (data) {
+            location.href='/'
+        }
     }
 </script>
 </head>
@@ -97,30 +99,9 @@
                 </div>
               </div>
               <div class="card-body">
-                <form role="form" class="text-start">
-                  <div class="input-group input-group-outline my-3">
-                    <label class="form-label">Wallet</label>
-                    <input name="wallet" type="password" class="form-control">
-                  </div>
-                  <div class="input-group input-group-outline mb-3">
-                    <label class="form-label">Password</label>
-                    <input name="password" type="password" class="form-control">
-                  </div>
-                  <div class="form-check form-switch d-flex align-items-center mb-3">
-                    <input class="form-check-input" type="checkbox" id="rememberMe" checked>
-                    <label class="form-check-label mb-0 ms-3" for="rememberMe">Remember me</label>
-                  </div>
-                  <div class="text-center">
-                    <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
-                  </div>
-                  <p class="mt-4 text-sm text-center">
-                    Don't have an account?
-                    <a href="{{route('register')}}" class="text-primary text-gradient font-weight-bold">Sign up</a>
-                  </p>
-                </form>
-                <button onclick="web3Login();">
-                    Caca
-                                      </button>
+                <div class="text-center">
+                    <button onclick="web3Login();" type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Login with Metamask</button>
+                </div>
               </div>
             </div>
           </div>
@@ -130,25 +111,18 @@
         <div class="container">
           <div class="row align-items-center justify-content-lg-between">
             <div class="col-12 col-md-6 my-auto">
-              <div class="copyright text-center text-sm text-white text-lg-start">
-                © <script>
+              <div class="copyright text-center text-sm text-white text-lg-start"><script>
                   document.write(new Date().getFullYear())
                 </script>
-                <a href="https://www.creative-tim.com" class="font-weight-bold text-white" target="_blank">Creative Tim</a></div>
+                <a target="_blank" href="{{route('index')}}" class="font-weight-bold text-white">Prændi™</a></div>
             </div>
             <div class="col-12 col-md-6">
               <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                 <li class="nav-item">
-                  <a href="https://www.creative-tim.com" class="nav-link text-white" target="_blank">Creative Tim</a>
+                  <a href="{{route('terms')}}" class="nav-link text-white">Terms and conditions</a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-white" target="_blank">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/blog" class="nav-link text-white" target="_blank">Blog</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-white" target="_blank">License</a>
+                  <a href="{{route('about')}}" class="nav-link text-white">About Prændi</a>
                 </li>
               </ul>
             </div>

@@ -29,11 +29,23 @@ Route::controller(Controller::class)->group(function () {
 
     Route::get('/post/{id}', 'post');
 
+    Route::post('/post', 'postactions');
+
+    Route::post('/post/{id}', 'comment');
+
     Route::get('/profile', 'profile')->name('profile');
+
+    Route::post('/profile', 'createprofile');
 
     Route::get('/login', 'login')->name('login');
 
     Route::get('/register', 'register')->name('register');
+
+    Route::post('/logout', 'logout')->name('logout');
+
+    Route::get('/terms', 'terms')->name('terms');
+
+    Route::get('/about', 'about')->name('about');
 });
 
 Route::controller(Web3LoginController::class)->group(function () {
