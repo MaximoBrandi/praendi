@@ -17,9 +17,12 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('name')->nullable();
-            $table->string('pfp')->nullable();
+            $table->string('grade')->nullable();
+            $table->string('banner')->nullable();
+            $table->string('pfp')->default('/storage/photos/profile_pictures/default.jpg');
             $table->string('bio')->nullable();
-            $table->json('socialmedia')->nullable();
+            $table->json('social')->nullable();
+            $table->json('contact')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

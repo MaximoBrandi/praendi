@@ -1,4 +1,15 @@
 <?php return array (
+  'intervention/image' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Intervention\\Image\\ImageServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Image' => 'Intervention\\Image\\Facades\\Image',
+    ),
+  ),
   'laravel/breeze' => 
   array (
     'providers' => 
@@ -53,6 +64,17 @@
     'providers' => 
     array (
       0 => 'Termwind\\Laravel\\TermwindServiceProvider',
+    ),
+  ),
+  'spatie/laravel-glide' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\Glide\\GlideServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'GlideImage' => 'Spatie\\Glide\\GlideImageFacade',
     ),
   ),
   'spatie/laravel-ignition' => 

@@ -35,7 +35,11 @@ Route::controller(Controller::class)->group(function () {
 
     Route::get('/profile', 'profile')->name('profile');
 
+    Route::get('/profile/{id}', 'profile');
+
     Route::post('/profile', 'createprofile');
+
+    Route::post('/profile/update', 'updateprofile')->name('updateprofile');
 
     Route::get('/login', 'login')->name('login');
 
@@ -46,6 +50,8 @@ Route::controller(Controller::class)->group(function () {
     Route::get('/terms', 'terms')->name('terms');
 
     Route::get('/about', 'about')->name('about');
+
+    Route::post('/searchprofile', 'searchprofile')->name('searchprofile');
 });
 
 Route::controller(Web3LoginController::class)->group(function () {

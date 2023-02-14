@@ -161,7 +161,7 @@
                             <h5>
                                 <a href="/profile/{{$comment->user->id}}">{{$comment->user->profile->name}}</a>
                             </h5>
-                                <p class="date">{{$comment->created_at}} </p>
+                                <p style="white-space: pre-wrap;" class="date">{{$comment->created_at}}</p>
                             </div>
                             <div class="reply-btn">
                                 <a style="cursor: pointer" onclick="deleteComment({{$comment->id}})" class="btn-reply text-uppercase">delete</a>

@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Laravel\Scout\Searchable;
 
 class Profile extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, Searchable;
 
         /**
      * The attributes that are mass assignable.
@@ -18,15 +19,30 @@ class Profile extends Model
     protected $fillable = [
         'name',
         'bio',
-        'socialmedia',
+        'user_id',
+        'social',
+        'contact',
         'pfp'
     ];
 
-    protected function socialmedia(): Attribute
+    protected function social(): Attribute
     {
         return Attribute::make(
             get: fn ($value) => json_decode($value, true),
             set: fn ($value) => json_encode($value),
         );
+    }
+
+    protected function contact(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => json_decode($value, true),
+            set: fn ($value) => json_encode($value),
+        );
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
