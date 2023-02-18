@@ -13,6 +13,8 @@ use App\Models\User;
 use App\Models\Profile;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Follow;
+use App\Models\Newsletter;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Storage;
 
@@ -207,9 +209,9 @@ class Controller extends BaseController
 
     public function createprofile(Request $request){
         $validator = Validator::make($request->all(), [
-            'photo' => 'required|image|max:2048',
-            'name' => ['required','string', 'max:255'],
-            'bio' => ['required','string', 'max:255'],
+            'photo' => 'nullable|image|max:2048',
+            'name' => ['nullable','string', 'max:255'],
+            'bio' => ['nullable','string', 'max:255'],
         ]);
 
         $popo = array(
@@ -263,7 +265,7 @@ class Controller extends BaseController
             }else{
                 do{
                     $name = 'Anonymus User '. rand(0,9999);
-                }while(Profile::select('name', $name) !== null);
+                }while(Profile::where('name', $name)->get()->first() !== null);
 
                 $Profile->name = $name;
             }
@@ -407,5 +409,30 @@ class Controller extends BaseController
         }
 
         return json_encode($search->get()->toArray());
+    }
+
+    public function about(){
+        return view('about', ['posts' => Post::all()]);
+    }
+
+    public function terms(){
+        return view('terms', ['posts' => Post::all()]);
+    }
+
+    public function followaccount(Request $request){
+        $validator = Validator::make($request->all(), [
+            'account' => 'required|integer'
+        ]);
+
+        if ($validator->fails()) {
+            return 'boludo :v';
+        }else{
+            Follow::Create([
+                'followed_profile_id' => preg_replace('/[^a-zA-Z0-9 ]/', '', filter_var($request->account, FILTER_UNSAFE_RAW,  FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH)),
+                'profile_id' => Auth::user()->id,
+            ]);
+
+            return 'ok';
+        }
     }
 }

@@ -98,7 +98,7 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a href="/">Home</a></li>
-                                            <li><a href="/category">Category</a></li>
+                                            <li><a href="/category">Categories</a></li>
                                             <li><a href="<?php echo e(route('about')); ?>">Prændi</a></li>
                                         </ul>
                                     </nav>
@@ -109,10 +109,10 @@
                                 <div class="header-right f-right d-none d-lg-block">
                                     <!-- Heder social -->
                                     <ul class="header-social">
-                                        <li><a href="https://www.fb.com/sai4ull"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                        <li> <a href="#"><i class="fab fa-youtube"></i></a></li>
+                                        <li><a href="https://www.facebook.com/praendi/"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="https://twitter.com/praendi"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="https://www.instagram.com/praendi/"><i class="fab fa-instagram"></i></a></li>
+                                        <!-- <li> <a href="#"><i class="fab fa-youtube"></i></a></li> -->
                                     </ul>
                                     <!-- Search Nav -->
                                     <div class="nav-search">
@@ -155,9 +155,8 @@
                                     </div>
                                     <div class="footer-tittle">
                                         <div class="footer-pera">
-                                            <p class="info1">Lorem ipsum dolor sit amet, nsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                                            <p class="info2">198 West 21th Street, Suite 721 New York,NY 10010</p>
-                                            <p class="info2">Phone: +95 (0) 123 456 789 Cell: +95 (0) 123 456 789</p>
+                                            <p class="info1">General purposes focused on techonology blog, created to adapt more people to web3 standards.</p>
+                                            <p class="info2">With love from Buenos Aires, Argentina</p>
                                         </div>
                                     </div>
                                 </div>
@@ -170,6 +169,7 @@
                                 </div>
 
                                 <?php echo $__env->yieldContent('popularposts'); ?>
+
                             </div>
                         </div>
                         <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
@@ -187,12 +187,12 @@
             <!-- footer-bottom aera -->
             <div class="footer-bottom-area footer-bg">
                 <div class="container">
-                    <div class="footer-border">
+                    <div class=" footer-border">
                         <div class="row d-flex align-items-center">
                             <div class="col-xl-12 ">
-                                <div class="footer-copy-right text-center">
-                                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | <a href="https://maximoprandi.tech" target="_blank">M&P </a> | <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                <div class=" footer-copy-right text-center">
+                                    <p class=""><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+     <script>document.write(new Date().getFullYear());</script> | <a href="https://maximoprandi.tech" target="_blank">M&P </a> | <a href="https://colorlib.com" target="_blank">Colorlib</a>
     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                                 </div>
                             </div>
@@ -207,11 +207,24 @@
     <div class="search-model-box">
         <div class="d-flex align-items-center h-100 justify-content-center">
             <div class="search-close-btn">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Searching key.....">
+            <form name="searchPost" method="post" action="<?php echo e(route('category')); ?>" class="search-model-form">
+                <?php echo csrf_field(); ?>
+                <input name="search" type="text" id="search-input" placeholder="Searching key.....">
             </form>
         </div>
     </div>
+
+    <script>
+        document.onkeydown=function(evt){
+            var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
+            if(keyCode == 13)
+            {
+                if ((document.getElementById('search-input').value) !== null) {
+                    document.searchPost.submit();
+                }
+            }
+        }
+    </script>
     <!-- Search model end -->
 
     <!-- JS here -->

@@ -15055,6 +15055,7 @@ fieldset:disabled .btn {
 
   .justify-content-lg-end {
     justify-content: flex-end !important;
+    margin-right: 4rem !important;
   }
 
   .justify-content-lg-center {
@@ -16397,6 +16398,7 @@ fieldset:disabled .btn {
 
   .text-lg-start {
     text-align: left !important;
+    margin-left: 4rem !important;
   }
 
   .text-lg-end {

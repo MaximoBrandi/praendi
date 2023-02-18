@@ -23,6 +23,11 @@
 
   <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
 
+  <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+  <style>
+    .preloader{background-color:#f7f7f7;width:100%;height:100%;position:fixed;top:0;left:0;right:0;bottom:0;z-index:999999;-webkit-transition:.6s;-o-transition:.6s;transition:.6s;margin:0 auto}.preloader .preloader-circle{width:100px;height:100px;position:relative;border-style:solid;border-width:1px;border-top-color:#ff2143;border-bottom-color:transparent;border-left-color:transparent;border-right-color:transparent;z-index:10;border-radius:50%;-webkit-box-shadow:0 1px 5px 0 rgba(35,181,185,0.15);box-shadow:0 1px 5px 0 rgba(35,181,185,0.15);background-color:#ffffff;-webkit-animation:zoom 2000ms infinite ease;animation:zoom 2000ms infinite ease;-webkit-transition:.6s;-o-transition:.6s;transition:.6s}.preloader .preloader-circle2{border-top-color:#0078ff}.preloader .preloader-img{position:absolute;top:50%;z-index:200;left:0;right:0;margin:0 auto;text-align:center;display:inline-block;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%);padding-top:6px;-webkit-transition:.6s;-o-transition:.6s;transition:.6s}.preloader .preloader-img img{max-width:55px}.preloader .pere-text strong{font-weight:800;color:#dca73a;text-transform:uppercase}@-webkit-keyframes zoom{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-transition:.6s;-o-transition:.6s;transition:.6s}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg);-webkit-transition:.6s;-o-transition:.6s;transition:.6s}}@keyframes zoom{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-transition:.6s;-o-transition:.6s;transition:.6s}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg);-webkit-transition:.6s;-o-transition:.6s;transition:.6s}}
+  </style>
+
   <script>
     async function web3Login() {
         if (!window.ethereum) {
@@ -60,6 +65,17 @@
 </head>
 
 <body class="bg-gray-200">
+
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="/assets/img/logo/LogoA80.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="container position-sticky z-index-sticky top-0">
         <div class="row">
@@ -114,16 +130,16 @@
               <div class="copyright text-center text-sm text-white text-lg-start"><script>
                   document.write(new Date().getFullYear())
                 </script>
-                <a target="_blank" href="{{route('index')}}" class="font-weight-bold text-white">Prændi™</a></div>
+                <a href="{{route('index')}}" class="font-weight-bold text-white">Prændi™</a></div>
             </div>
             <div class="col-12 col-md-6">
               <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                 <li class="nav-item">
-                  <a href="{{route('terms')}}" class="nav-link text-white">Terms and conditions</a>
+                  <a href="{{route('about')}}" class="nav-link text-white">Prændi</a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{route('about')}}" class="nav-link text-white">About Prændi</a>
-                </li>
+                    <a href="{{route('terms')}}" class="nav-link text-white">Terms and conditions</a>
+                  </li>
               </ul>
             </div>
           </div>
@@ -149,6 +165,14 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="assets/js/material-dashboard.min.js?v=3.0.4"></script>
+
+  <script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
+  <script src="/assets/js/slick.min.js"></script>
+
+  <script src="/assets/js/wow.min.js"></script>
+  <script src="/assets/js/animated.headline.js"></script>
+  <script src="/assets/js/jquery.magnific-popup.js"></script>
+  <script src="/assets/js/main.js"></script>
 </body>
 
 </html>

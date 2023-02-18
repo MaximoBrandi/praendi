@@ -16397,6 +16397,7 @@ fieldset:disabled .btn {
 
   .text-lg-start {
     text-align: left !important;
+    margin-left: 4rem !important;
   }
 
   .text-lg-end {

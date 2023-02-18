@@ -1,5 +1,9 @@
 @extends('layouts.profile')
 
+@section('scripts')
+    <script src="/assets/js/custom/account.js"></script>
+@endsection
+
 @section('main')
     <div class="container-fluid px-2 px-md-4">
         <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('{{$profile->banner}}');">
@@ -24,6 +28,24 @@
                     </p>
                     </div>
                 </div>
+                @if (Auth::user()->id !== null && $profile->id !== Auth::user()->profile->id && Follow::where('followed_profile_id', $profile->id)->exists())
+                    <div class="col-md-2 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+                        <div class="nav-wrapper position-relative end-0">
+                            <ul class="nav nav-pills nav-fill p-1" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link mb-0 px-0 py-1 active" href="javascript:;" onclick="alert()" aria-selected="true">
+
+                                            <button onclick="followAccount('{{csrf_token()}}', {{$profile->id}})" class="nav-link mb-0 px-0 py-0">
+                                                <i class="material-icons text-lg position-relative">person_add</i>
+                                                <span id="followbutton" class="ms-1">Follow</span>
+                                            </button>
+
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                @endif
             </div>
             <div class="row">
                 <div class="row">

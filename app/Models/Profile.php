@@ -45,4 +45,12 @@ class Profile extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function follows(){
+        return $this->hasMany(Follow::class);
+    }
+
+    public function followers(){
+        return $this->hasMany(Follow::class, 'followed_profile_id');
+    }
 }

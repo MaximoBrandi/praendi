@@ -52,6 +52,8 @@ Route::controller(Controller::class)->group(function () {
     Route::get('/about', 'about')->name('about');
 
     Route::post('/searchprofile', 'searchprofile')->name('searchprofile');
+
+    Route::post('/follow-account', 'followaccount')->name('followaccount');
 });
 
 Route::controller(Web3LoginController::class)->group(function () {
