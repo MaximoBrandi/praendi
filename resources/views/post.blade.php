@@ -132,7 +132,7 @@
 
         <div class="blog-author">
            <div class="media align-items-center">
-              <img width="70px" height="70px" style="border-radius:50%" src="{{'/storage/'.$postID->user->profile->pfp}}" alt="">
+              <img width="70px" height="70px" style="border-radius:50%" src="{{$postID->user->profile->pfp}}" alt="">
               <div class="media-body">
                  <a href="/profile/{{$postID->user->id}}">
                     <h4>{{$postID->user->profile->name}}</h4>
@@ -150,7 +150,7 @@
                 <div class="single-comment justify-content-between d-flex">
                 <div class="user justify-content-between d-flex">
                     <div class="thumb">
-                        <img src="/storage/{{$comment->user->profile->pfp}}" alt="">
+                        <img src="{{$comment->user->profile->pfp}}" alt="">
                     </div>
                     <div class="desc">
                         <p class="comment">

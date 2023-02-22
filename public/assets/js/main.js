@@ -1,6 +1,6 @@
 (function ($)
   { "use strict"
-  
+
 /* 1. Proloder */
     $(window).on('load', function () {
       $('#preloader-active').delay(450).fadeOut('slow');
@@ -38,7 +38,7 @@
         autoplaySpeed: 3500,
         dots: false,
         fade: true,
-        arrows: false, 
+        arrows: false,
         prevArrow: '<button type="button" class="slick-prev"><i class="ti-angle-left"></i></button>',
         nextArrow: '<button type="button" class="slick-next"><i class="ti-angle-right"></i></button>',
         responsive: [{
@@ -96,16 +96,16 @@
           arrows: true,
           autoplay:true,
           loop:true,
-          slidesToShow: 3,
+          slidesToShow: 4,
           prevArrow:'<button type="button" class="slick-prev"><i class="ti-angle-left"></i></button>',
           nextArrow:'<button type="button" class="slick-next"><i class="ti-angle-right"></i></button>',
-          slidesToScroll: 1,
+          slidesToScroll: 4,
           responsive: [
             {
             breakpoint: 1200,
             settings: {
               slidesToShow: 2,
-              slidesToScroll: 1,
+              slidesToScroll: 2,
               infinite: true,
               dots: false,
             }
@@ -114,7 +114,7 @@
             breakpoint: 992,
             settings: {
               slidesToShow: 2,
-              slidesToScroll: 1
+              slidesToScroll: 2
             }
             },
             {
@@ -135,7 +135,7 @@
             }
           ]
           });
-          
+
 
     // Weekly-2 Acticve
       $('.weekly3-news-active').slick({
@@ -184,7 +184,7 @@
             }
           ]
     });
-          
+
     // recent-active
     $('.recent-active').slick({
         dots: false,
@@ -195,7 +195,7 @@
         slidesToScroll: 1,
         prevArrow: '<button type="button" class="slick-prev"> <span class="flaticon-arrow"></span></button>',
         nextArrow: '<button type="button" class="slick-next"> <span class="flaticon-arrow"><span></button>',
-       
+
         initialSlide: 3,
         loop:true,
         responsive: [
@@ -365,8 +365,8 @@
     new WOW().init();
 
 /* 11. Datepicker */
-    
-// 11. ---- Mailchimp js --------//  
+
+// 11. ---- Mailchimp js --------//
     function mailChimp() {
       $('#mc_embed_signup').find('form').ajaxChimp();
     }

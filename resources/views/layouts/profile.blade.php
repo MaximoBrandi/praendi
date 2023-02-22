@@ -27,9 +27,12 @@ use Illuminate\Support\Facades\Storage;
 
     @yield('scripts')
 
-    <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="/assets/css/slick.css">
+    <link rel="stylesheet" href="/assets/css/nice-select.css">
     <style>
         .preloader{background-color:#f7f7f7;width:100%;height:100%;position:fixed;top:0;left:0;right:0;bottom:0;z-index:999999;-webkit-transition:.6s;-o-transition:.6s;transition:.6s;margin:0 auto}.preloader .preloader-circle{width:100px;height:100px;position:relative;border-style:solid;border-width:1px;border-top-color:#ff2143;border-bottom-color:transparent;border-left-color:transparent;border-right-color:transparent;z-index:10;border-radius:50%;-webkit-box-shadow:0 1px 5px 0 rgba(35,181,185,0.15);box-shadow:0 1px 5px 0 rgba(35,181,185,0.15);background-color:#ffffff;-webkit-animation:zoom 2000ms infinite ease;animation:zoom 2000ms infinite ease;-webkit-transition:.6s;-o-transition:.6s;transition:.6s}.preloader .preloader-circle2{border-top-color:#0078ff}.preloader .preloader-img{position:absolute;top:50%;z-index:200;left:0;right:0;margin:0 auto;text-align:center;display:inline-block;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%);padding-top:6px;-webkit-transition:.6s;-o-transition:.6s;transition:.6s}.preloader .preloader-img img{max-width:55px}.preloader .pere-text strong{font-weight:800;color:#dca73a;text-transform:uppercase}@-webkit-keyframes zoom{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-transition:.6s;-o-transition:.6s;transition:.6s}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg);-webkit-transition:.6s;-o-transition:.6s;transition:.6s}}@keyframes zoom{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-transition:.6s;-o-transition:.6s;transition:.6s}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg);-webkit-transition:.6s;-o-transition:.6s;transition:.6s}}
+        .weekly2-news-area .weekly2-wrapper .slider-wrapper{background:#fff;padding:30px 22px 19px 23px;border-radius:10px}.weekly2-news-area .weekly2-wrapper .slider-wrapper .weekly2-single{margin-left:15px;margin-right:15px}.weekly2-news-area .weekly2-wrapper .slider-wrapper .weekly2-single .weekly2-img{margin-bottom:20px}.weekly2-news-area .weekly2-wrapper .slider-wrapper .weekly2-single .weekly2-img img{width:100%;border-radius:6px}.weekly2-news-area .weekly2-wrapper .slider-wrapper .weekly2-single .weekly2-caption h4 a{font-size:16px;font-weight:700;line-height:1.3;display:block;padding-right:20px}@media only screen and (min-width: 576px) and (max-width: 767px){.weekly2-news-area .weekly2-wrapper .slider-wrapper .weekly2-single .weekly2-caption h4 a{padding-right:0px}}.weekly2-news-area .weekly2-wrapper .slider-wrapper .weekly2-single .weekly2-caption h4 a:hover{color:#ff2143}.weekly2-news-area .weekly2-wrapper .slider-wrapper .weekly2-single .weekly2-caption p{color:#838793;font-size:12px;margin:0}.weekly2-news-area .weekly2-wrapper .slider-wrapper .home-banner2 img{width:100%}.weekly2-news-area .weekly2-news-active button{cursor:pointer}.weekly2-news-area .weekly2-news-active .slick-arrow{position:absolute;top:-46px;right:10px;background:none;border:none;color:#707b8e;padding:0;cursor:pointer;font-size:12px}.weekly2-news-area .weekly2-news-active .slick-prev.slick-arrow{right:37px}
     </style>
     </head>
 
@@ -195,12 +198,38 @@ use Illuminate\Support\Facades\Storage;
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../assets/js/material-dashboard.min.js?v=3.0.4"></script>
 
+    <script src="/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <!-- Jquery, Popper, Bootstrap -->
     <script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="/assets/js/slick.min.js"></script>
+    <script src="/assets/js/popper.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="/assets/js/jquery.slicknav.min.js"></script>
 
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="/assets/js/owl.carousel.min.js"></script>
+    <script src="/assets/js/slick.min.js"></script>
+    <!-- Date Picker -->
+    <script src="/assets/js/gijgo.min.js"></script>
+    <!-- One Page, Animated-HeadLin -->
     <script src="/assets/js/wow.min.js"></script>
     <script src="/assets/js/animated.headline.js"></script>
     <script src="/assets/js/jquery.magnific-popup.js"></script>
+
+    <!-- Scrollup, nice-select, sticky -->
+    <script src="/assets/js/jquery.scrollUp.min.js"></script>
+    <script src="/assets/js/jquery.nice-select.min.js"></script>
+    <script src="/assets/js/jquery.sticky.js"></script>
+
+    <!-- contact js -->
+    <script src="/assets/js/contact.js"></script>
+    <script src="/assets/js/jquery.form.js"></script>
+    <script src="/assets/js/jquery.validate.min.js"></script>
+    <script src="/assets/js/mail-script.js"></script>
+    <script src="/assets/js/jquery.ajaxchimp.min.js"></script>
+
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="/assets/js/plugins.js"></script>
     <script src="/assets/js/main.js"></script>
     </body>
 

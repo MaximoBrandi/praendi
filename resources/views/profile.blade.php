@@ -28,17 +28,24 @@
                     </p>
                     </div>
                 </div>
-                @if (Auth::user()->id !== null && $profile->id !== Auth::user()->profile->id && Follow::where('followed_profile_id', $profile->id)->exists())
+                @if (Auth::user()->id !== null && $profile->id !== Auth::user()->profile->id)
                     <div class="col-md-2 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
                         <div class="nav-wrapper position-relative end-0">
                             <ul class="nav nav-pills nav-fill p-1" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link mb-0 px-0 py-1 active" href="javascript:;" onclick="alert()" aria-selected="true">
 
+                                        @if (Follow::where('followed_profile_id', $profile->id)->exists())
+                                            <button onclick="followAccount('{{csrf_token()}}', {{$profile->id}})" class="nav-link mb-0 px-0 py-0">
+                                                <i class="material-icons text-lg position-relative">person_remove</i>
+                                                <span id="followbutton" class="ms-1">Unfollow</span>
+                                            </button>
+                                        @else
                                             <button onclick="followAccount('{{csrf_token()}}', {{$profile->id}})" class="nav-link mb-0 px-0 py-0">
                                                 <i class="material-icons text-lg position-relative">person_add</i>
                                                 <span id="followbutton" class="ms-1">Follow</span>
                                             </button>
+                                        @endif
 
                                     </a>
                                 </li>
@@ -93,7 +100,7 @@
                                     @foreach ($profile->user->comments->take(5) as $comment)
                                         <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2 pt-0">
                                             <div class="avatar me-3">
-                                                <img src="{{'/storage/'.$profile->pfp}}" width="48px" height="48px" alt="kal" class="border-radius-lg shadow">
+                                                <img src="{{$profile->pfp}}" width="48px" height="48px" alt="kal" class="border-radius-lg shadow">
                                             </div>
                                             <div class="d-flex align-items-start flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">{{$profile->name}}</h6>
@@ -134,52 +141,250 @@
                             </div>
                         </div>
                     </div>
+                    @if ($profile->user->posts->take(3)->count() < 4)
                     <div class="col-12 mt-4">
-                    <div class="mb-5 ps-3">
-                        <h6 class="mb-1">Posts</h6>
-                        <p class="text-sm">Posts writed by you</p>
-                    </div>
-                        <div class="row">
+                        <div class="mb-5 ps-3">
+                            <h6 class="mb-1">Posts</h6>
+                            <p class="text-sm">Posts writed by you</p>
+                        </div>
+                            <div class="row">
 
-                            @if($profile->user->posts)
-                                @foreach ($profile->user->posts as $post)
-                                    <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
-                                        <div class="card card-blog card-plain">
-                                            <div class="card-header p-0 mt-n4 mx-3">
-                                            <a href="/post/{{$post->id}}" class="d-block shadow-xl border-radius-xl">
-                                                <img src="{{$post->image}}" width="232" height="131px" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
-                                            </a>
-                                            </div>
-                                            <div class="card-body p-3">
-                                            <p style="cursor: pointer;" onclick="location.href='/category/{{$post->category}}'" class="mb-0 text-sm">{{$post->category}}</p>
-                                            <a href="/post/{{$post->id}}">
-                                                <h5>
-                                                    {{$post->title}}
-                                                </h5>
-                                            </a>
-                                            <p class="mb-4 text-sm">
-                                                Caca y compota de pera
-                                            </p>
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <button  onclick="location.href='/post/{{$post->id}}'" type="button" class="btn btn-outline-primary btn-sm mb-0">Read Post</button>
-                                                <div class="avatar-group mt-2">
-                                                    @foreach ($post->comments->take(5) as $comment)
-                                                        <a href="/profile/{{$comment->user->id}}" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{$comment->user->profile->name}}">
-                                                            <img alt="Image placeholder" src="/storage/{{$comment->user->profile->pfp}}">
-                                                        </a>
-                                                    @endforeach
+                                @if($profile->user->posts)
+                                    @foreach ($profile->user->posts->take(3) as $post)
+                                        <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                                            <div class="card card-blog card-plain">
+                                                <div class="card-header p-0 mt-n4 mx-3">
+                                                <a href="/post/{{$post->id}}" class="d-block shadow-xl border-radius-xl">
+                                                    <img src="{{$post->image}}" width="100%" height="131px" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
+                                                </a>
+                                                </div>
+                                                <div class="card-body p-3">
+                                                <p style="cursor: pointer;" onclick="location.href='/category/{{$post->category}}'" class="mb-0 text-sm">{{$post->category}}</p>
+                                                <a href="/post/{{$post->id}}">
+                                                    <h5>
+                                                        {{$post->title}}
+                                                    </h5>
+                                                </a>
+                                                <p class="mb-4 text-sm">
+                                                    Caca y compota de pera
+                                                </p>
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <button  onclick="location.href='/post/{{$post->id}}'" type="button" class="btn btn-outline-primary btn-sm mb-0">Read Post</button>
+                                                    <div class="avatar-group mt-2">
+                                                        @foreach ($post->comments->take(5) as $comment)
+                                                            <a href="/profile/{{$comment->user->id}}" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{$comment->user->profile->name}}">
+                                                                <img alt="Image placeholder" src="{{$comment->user->profile->pfp}}">
+                                                            </a>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <p class="text-sm">Nothing to see here!</p>
+                                @endif
+
+                            </div>
+                        </div>
+
+                        <div class="weekly2-news-area pt-50 pb-30 gray-bg">
+                            <div class=""> <!-- Container class to avoid errors -->
+                                <div class="weekly2-wrapper">
+                                    <div class="row">
+                                        <!-- Banner -->
+                                        <div class="col-lg-12">
+                                            <div class="slider-wrapper">
+                                                <!-- section Tittle -->
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="small-tittle mb-30">
+                                                            <h4>Shots</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @if($profile->user->shots)
+                                                    <!-- Slider -->
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="weekly2-news-active d-flex">
+
+                                                                @foreach ($profile->user->shots as $shots)
+                                                                    <div>
+                                                                        <div class="card card-blog card-plain">
+                                                                            <div class="card-header">
+                                                                            <a href="/shot/{{$shot->id}}" class="d-block shadow-xl border-radius-xl">
+                                                                                <img src="{{$shot->image}}" style="max-height:100%" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
+                                                                            </a>
+                                                                            </div>
+                                                                            <div class="card-body p-3">
+                                                                            <p style="cursor: pointer;" onclick="location.href='/category/{{$shot->category}}/shots'" class="mb-0 text-sm">{{$shot->category}}</p>
+                                                                            <a href="/shot/{{$shot->id}}">
+                                                                                <h5>
+                                                                                    {{$shot->title}}
+                                                                                </h5>
+                                                                            </a>
+                                                                            <p class="mb-4 text-sm">
+                                                                                Caca y compota de pera
+                                                                            </p>
+                                                                            <div class="d-flex align-items-center justify-content-between">
+                                                                                <button  onclick="location.href='/shot/{{$shot->id}}'" type="button" class="btn btn-outline-primary btn-sm mb-0">Read shot</button>
+                                                                                <div class="avatar-group mt-2">
+                                                                                    @foreach ($shot->comments->take(5) as $comment)
+                                                                                        <a href="/profile/{{$comment->user->id}}" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{$comment->user->profile->name}}">
+                                                                                            <img alt="Image placeholder" src="{{$comment->user->profile->pfp}}">
+                                                                                        </a>
+                                                                                    @endforeach
+                                                                                </div>
+                                                                            </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                @endforeach
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <p class="text-sm">Nothing to see here!</p>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
-                            @else
-                                <p class="text-sm">Nothing to see here!</p>
-                            @endif
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                    <div class="weekly2-news-area pt-50 pb-30 gray-bg">
+                        <div class=""> <!-- Container class to avoid errors -->
+                            <div class="weekly2-wrapper">
+                                <div class="row">
+                                    <!-- Banner -->
+                                    <div class="col-lg-12">
+                                        <div class="slider-wrapper">
+                                            <!-- section Tittle -->
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="small-tittle mb-30">
+                                                        <h4>Posts</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @if($profile->user->posts->count() >= 4)
+                                                <!-- Slider -->
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="weekly2-news-active d-flex">
 
+                                                            @foreach ($profile->user->posts as $post)
+                                                                <div>
+                                                                    <div class="card card-blog card-plain">
+                                                                        <div class="card-header">
+                                                                        <a href="/post/{{$post->id}}" class="d-block shadow-xl border-radius-xl">
+                                                                            <img src="{{$post->image}}" style="max-height:100%" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
+                                                                        </a>
+                                                                        </div>
+                                                                        <div class="card-body p-3">
+                                                                        <p style="cursor: pointer;" onclick="location.href='/category/{{$post->category}}'" class="mb-0 text-sm">{{$post->category}}</p>
+                                                                        <a href="/post/{{$post->id}}">
+                                                                            <h5>
+                                                                                {{$post->title}}
+                                                                            </h5>
+                                                                        </a>
+                                                                        <p class="mb-4 text-sm">
+                                                                            Caca y compota de pera
+                                                                        </p>
+                                                                        <div class="d-flex align-items-center justify-content-between">
+                                                                            <button  onclick="location.href='/post/{{$post->id}}'" type="button" class="btn btn-outline-primary btn-sm mb-0">Read post</button>
+                                                                            <div class="avatar-group mt-2">
+                                                                                @foreach ($post->comments->take(5) as $comment)
+                                                                                    <a href="/profile/{{$comment->user->id}}" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{$comment->user->profile->name}}">
+                                                                                        <img alt="Image placeholder" src="{{$comment->user->profile->pfp}}">
+                                                                                    </a>
+                                                                                @endforeach
+                                                                            </div>
+                                                                        </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <p class="text-sm">Nothing to see here!</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="weekly2-wrapper">
+                                <div class="row">
+                                    <!-- Banner -->
+                                    <div class="col-lg-12">
+                                        <div class="slider-wrapper">
+                                            <!-- section Tittle -->
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="small-tittle mb-30">
+                                                        <h4>Shots</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @if($profile->user->shots)
+                                                <!-- Slider -->
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="weekly2-news-active d-flex">
+
+                                                            @foreach ($profile->user->shots as $shots)
+                                                                <div>
+                                                                    <div class="card card-blog card-plain">
+                                                                        <div class="card-header">
+                                                                        <a href="/shot/{{$shot->id}}" class="d-block shadow-xl border-radius-xl">
+                                                                            <img src="{{$shot->image}}" style="max-height:100%" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
+                                                                        </a>
+                                                                        </div>
+                                                                        <div class="card-body p-3">
+                                                                        <p style="cursor: pointer;" onclick="location.href='/category/{{$shot->category}}/shots'" class="mb-0 text-sm">{{$shot->category}}</p>
+                                                                        <a href="/shot/{{$shot->id}}">
+                                                                            <h5>
+                                                                                {{$shot->title}}
+                                                                            </h5>
+                                                                        </a>
+                                                                        <p class="mb-4 text-sm">
+                                                                            Caca y compota de pera
+                                                                        </p>
+                                                                        <div class="d-flex align-items-center justify-content-between">
+                                                                            <button  onclick="location.href='/shot/{{$shot->id}}'" type="button" class="btn btn-outline-primary btn-sm mb-0">Read shot</button>
+                                                                            <div class="avatar-group mt-2">
+                                                                                @foreach ($shot->comments->take(5) as $comment)
+                                                                                    <a href="/profile/{{$comment->user->id}}" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{$comment->user->profile->name}}">
+                                                                                        <img alt="Image placeholder" src="{{$comment->user->profile->pfp}}">
+                                                                                    </a>
+                                                                                @endforeach
+                                                                            </div>
+                                                                        </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <p class="text-sm">Nothing to see here!</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

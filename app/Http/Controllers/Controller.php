@@ -195,8 +195,7 @@ class Controller extends BaseController
             $id = User::find($id)->profile->id;
 
             return view('profile', ['profile' => Profile::find($id)]);
-        }
-        if(Auth::user()){
+        }else if(Auth::user()){
             if(Auth::user()->profile){
                 return view('profile', ['profile' => Auth::user()->profile]);
             }else{
