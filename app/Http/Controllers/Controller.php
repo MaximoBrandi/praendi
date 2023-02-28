@@ -434,4 +434,20 @@ class Controller extends BaseController
             return 'ok';
         }
     }
+
+    public function newsletter(Request $request){
+        $validator = Validator::make($request->all(), [
+            'email' => 'email|required|max:256'
+        ]);
+
+        if ($validator->fails()) {
+            return 'boludo :v';
+        }else{
+            Newsletter::Create([
+                'email' => $request->email,
+            ]);
+
+            return 'ok';
+        }
+    }
 }

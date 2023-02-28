@@ -15,3 +15,21 @@ async function followAccount(token, id) {
         console.log(data);
     }
 }
+
+async function newsletter(token, email) {
+    response = await fetch('/newsletter-create', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        'email': email,
+        '_token': token
+    })
+    });
+    const data = await response.text();
+
+    if (data) {
+        console.log(data);
+    }
+}

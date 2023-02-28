@@ -149,7 +149,7 @@
                         </div>
                             <div class="row">
 
-                                @if($profile->user->posts)
+                                @if(!$profile->user->posts->isEmpty())
                                     @foreach ($profile->user->posts->take(3) as $post)
                                         <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                                             <div class="card card-blog card-plain">
@@ -183,7 +183,13 @@
                                         </div>
                                     @endforeach
                                 @else
-                                    <p class="text-sm">Nothing to see here!</p>
+                                    <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                                        <div class="card card-blog card-plain">
+                                            <div class="card-header p-0 mt-n4 mx-3">
+                                                <p class="text-sm">Nothing to see here!</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endif
 
                             </div>
@@ -201,6 +207,7 @@
                                                     <div class="col-lg-12">
                                                         <div class="small-tittle mb-30">
                                                             <h4>Shots</h4>
+                                                            <p class="text-sm">Shots made by you</p>
                                                         </div>
                                                     </div>
                                                 </div>
