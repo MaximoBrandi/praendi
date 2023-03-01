@@ -144,8 +144,14 @@
                     @if ($profile->user->posts->take(3)->count() < 4)
                     <div class="col-12 mt-4">
                         <div class="mb-5 ps-3">
-                            <h6 class="mb-1">Posts</h6>
-                            <p class="text-sm">Posts writed by you</p>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="small-tittle mb-30">
+                                        <h4>Posts</h4>
+                                        <p class="text-sm">Posts written by you</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                             <div class="row">
 

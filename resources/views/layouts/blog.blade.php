@@ -49,7 +49,7 @@
                                     <a href="/post/{{$post->id}}">
                                         <h3>{{$post->title}}</h3>
                                     </a>
-                                    <p>{{$post->created_at}}</p>
+                                    <p>{{$post->user->profile->name}}</p>
                                 </div>
                             </div>
                         @endforeach
@@ -62,10 +62,10 @@
                         <form method="post" action="{{route('category')}}">
                             @csrf
                             <div class="form-group">
-                                <input name="email" type="email" class="form-control" onfocus="this.placeholder = ''"
+                                <input name="email" id="email-input" type="email" class="form-control" onfocus="this.placeholder = ''"
                                     onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
                             </div>
-                            <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                            <button onclick="newsletter('{{csrf_token()}}', (document.getElementById('email-input').value));" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
                                 type="submit">Subscribe</button>
                         </form>
                     </aside>
@@ -86,7 +86,7 @@
             </div>
             <div class="whats-right-cap">
                 <h4><a href="/post/{{$post->id}}">{{$post->title}}</a></h4>
-                <p>{{$post->user->title}}  |  {{$post->created_at}}</p>
+                <p>{{$post->user->profile->name}}  |  {{$post->created_at->day}}  {{date("F", mktime(0, 0, 0, $post->created_at->month, 1))}} {{$post->created_at->year}}</p>
             </div>
         </div>
     @endforeach

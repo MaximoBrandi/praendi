@@ -19,7 +19,7 @@
                                                 <div class="trend-top-cap">
                                                     <span class="bgr" data-animation="fadeInUp" data-delay=".2s" data-duration="1000ms">{{ $post->category }}</span>
                                                     <h2><a href="/post/{{ $post->id }}" data-animation="fadeInUp" data-delay=".4s" data-duration="1000ms">{{ $post->title }}</a></h2>
-                                                    <p data-animation="fadeInUp" data-delay=".6s" data-duration="1000ms">by {{ $post->user->name }}   -   {{ $post->created_at }}</p>
+                                                    <p data-animation="fadeInUp" data-delay=".6s" data-duration="1000ms">{{ $post->user->profile->name }}   -   {{$post->created_at->day}}  {{date("F", mktime(0, 0, 0, $post->created_at->month, 1))}} {{$post->created_at->year}} </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -44,7 +44,7 @@
                                                 <div class="trend-top-cap trend-top-cap2">
                                                     <span class="bgb">{{$posts->where('category', 'qui')->sortByDesc('name')->first()->category}}</span>
                                                     <h2><a href="/post/{{$posts->where('category', 'qui')->sortByDesc('name')->first()->id}}">{{$posts->where('category', 'qui')->sortByDesc('name')->first()->title}}</a></h2>
-                                                    <p>by {{$posts->where('category', 'qui')->sortByDesc('name')->first()->user->name}}   -   {{$posts->where('category', 'qui')->sortByDesc('name')->first()->created_at}}</p>
+                                                    <p>{{$posts->where('category', 'qui')->sortByDesc('name')->first()->user->profile->name}} -{{$posts->where('category', 'qui')->sortByDesc('name')->first()->created_at->day}}  {{date("F", mktime(0, 0, 0, $posts->where('category', 'qui')->sortByDesc('name')->first()->created_at->month, 1))}} {{$posts->where('category', 'qui')->sortByDesc('name')->first()->created_at->year}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -57,7 +57,7 @@
                                                 <div class="trend-top-cap trend-top-cap2">
                                                     <span class="bgg">{{$posts->sortByDesc('reads')->first()->category}}</span>
                                                     <h2><a href="/post/{{$posts->sortByDesc('reads')->first()->id}}">{{$posts->sortByDesc('reads')->first()->title}}</a></h2>
-                                                    <p>by {{$posts->sortByDesc('reads')->first()->user->name}}   -   {{$posts->sortByDesc('reads')->first()->created_at}}</p>
+                                                    <p>{{$posts->sortByDesc('reads')->first()->user->profile->name}} - {{$posts->sortByDesc('reads')->first()->created_at->day}}  {{date("F", mktime(0, 0, 0, $posts->sortByDesc('reads')->first()->created_at->month, 1))}} {{$posts->sortByDesc('reads')->first()->created_at->year}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -74,7 +74,7 @@
                                                 <div class="trend-top-cap trend-top-cap2">
                                                     <span class="bgg">{{$posts->sortByDesc('reads')->first()->category}}</span>
                                                     <h2><a href="/post/{{$posts->sortByDesc('reads')->first()->id}}">{{$posts->sortByDesc('reads')->first()->title}}</a></h2>
-                                                    <p>by {{$posts->sortByDesc('reads')->first()->user->name}}   -   {{$posts->sortByDesc('reads')->first()->created_at}}</p>
+                                                    <p>{{$posts->sortByDesc('reads')->first()->user->profile->name}} - {{$posts->sortByDesc('reads')->first()->created_at->day}}  {{date("F", mktime(0, 0, 0, $posts->sortByDesc('reads')->first()->created_at->month, 1))}} {{$posts->sortByDesc('reads')->first()->created_at->year}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -111,7 +111,7 @@
                                         </div>
                                         <div class="what-cap">
                                             <h4><a href="/post/{{ $post->id }}" > <h4><a href="/post/{{ $post->id }}">{{ $post->title }}</a></h4></a></h4>
-                                            <P>{{ $post->created_at }}</P>
+                                            <P>{{$post->user->profile->name}}</P>
                                             <a class="popup-video btn-icon" href="/post/{{ $post->id }}"><span class="flaticon-play-button"></span></a>
 
                                         </div>
@@ -144,7 +144,7 @@
                                                     </div>
                                                     <div class="weekly3-caption">
                                                         <h4><a href="/post/{{ $post->id }}">{{ $post->title }}</a></h4>
-                                                        <p>{{ $post->created_at }}</p>
+                                                        <p>{{$post->user->profile->name}} | {{$post->created_at->day}}  {{date("F", mktime(0, 0, 0, $post->created_at->month, 1))}} {{$post->created_at->year}}</p>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -170,7 +170,7 @@
             </div>
             <div class="whats-right-cap">
                 <h4><a href="/post/{{$post->id}}">{{$post->title}}</a></h4>
-                <p>{{$post->user->title}}  |  {{$post->created_at}}</p>
+                <p>{{$post->user->profile->name}}  |  {{$post->created_at->day}}  {{date("F", mktime(0, 0, 0, $post->created_at->month, 1))}} {{$post->created_at->year}}</p>
             </div>
         </div>
     @endforeach

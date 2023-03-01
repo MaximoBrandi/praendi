@@ -14,6 +14,7 @@ use App\Models\Profile;
 use App\Models\Post;
 use App\Models\Comment;
 use App\Models\Follow;
+use App\Models\Like;
 use App\Models\Newsletter;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Storage;
@@ -307,8 +308,25 @@ class Controller extends BaseController
     }
 
     public function postactions(Request $request){
-        if((Comment::find($request->comment)->user->id) == Auth::user()->id){
-            Comment::find($request->comment)->delete();
+        if ($request->comment) {
+            if((Comment::find($request->comment)->user->id) == Auth::user()->id){
+                Comment::find($request->comment)->delete();
+                return 'ok';
+            }
+        } else if($request->post){
+            if(Post::find($request->post)->user_liked() == null){
+                Like::create([
+                    'post_id' => $request->post,
+                    'user_id' => Auth::user()->id
+                ]);
+                return 'ok';
+            }else{
+                Like::where([
+                    'post_id' => $request->post,
+                    'user_id' => Auth::user()->id
+                ])->first()->delete();
+                return 'ok';
+            }
         }
     }
 

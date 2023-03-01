@@ -4,25 +4,6 @@
 
 
 @section('content')
-    <script>
-        async function deleteComment(id) {
-            response = await fetch('/post', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                'comment': id,
-                '_token': '{{ csrf_token() }}'
-            })
-            });
-            const data = await response.text();
-
-            if (data) {
-                location.reload();
-            }
-        }
-    </script>
 
     <div class="col-lg-8 posts-list">
         <div class="single-post">
@@ -34,8 +15,9 @@
                  all gathered us saying he our
               </h2>
               <ul class="blog-info-link mt-3 mb-4">
-                 <li><a href="#"><i class="fa fa-user"></i>{{$postID->category}}</a></li>
-                 <li><a href="#"><i class="fa fa-comments"></i> {{$postID->comments->count()}} Comments</a></li>
+                 <li><a href="/category/{{$postID->category}}"><i class="fa fa-user"></i>{{$postID->category}}</a></li>
+                 <li><a href="#comments"><i class="fa fa-comments"></i> {{$postID->comments->count()}} Comments</a></li>
+                 <li><a href="javascript:;"><i class="fa fa-comments"></i>{{$postID->created_at->day}}  {{date("F", mktime(0, 0, 0, $postID->created_at->month, 1))}} {{$postID->created_at->year}}</a></li>
               </ul>
               <p class="excert">
                  MCSE boot camps have its supporters and its detractors. Some people do not understand why you
@@ -71,17 +53,26 @@
         </div>
         <div class="navigation-top">
            <div class="d-sm-flex justify-content-between text-center">
-              <p class="like-info"><span class="align-middle"><i class="fa fa-heart"></i></span> Lily and 4
-                 people like this</p>
-              <div class="col-sm-4 text-center my-2 my-sm-0">
-                 <!-- <p class="comment-count"><span class="align-middle"><i class="fa fa-comment"></i></span> 06 Comments</p> -->
-              </div>
-              <ul class="social-icons">
-                 <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                 <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-                 <li><a href="#"><i class="fab fa-behance"></i></a></li>
-              </ul>
+                <ul class="like-info social-icons">
+                    @if ($postID->user_liked())
+                        <li style="margin-right:0px;"><a onclick="like({{$postID->id}}, '{{csrf_token()}}')" href="javascript:;"><i style="color:greenyellow;" class="fa fa-heart"></i></a></li>
+                    @else
+                        <li style="margin-right:0px;"><a onclick="like({{$postID->id}}, '{{csrf_token()}}')" href="javascript:;"><i class="fa fa-heart"></i></a></li>
+                    @endif
+
+                    @if ($postID->likes->count() >= 2)
+                        <li><p class="like-info">{{$postID->likes->sortByDesc('created_at')->first()->user->profile->name}} and {{$postID->likes->count()}} people like this</p></li>
+                    @elseif($postID->likes->count() == 1)
+                        <li><p class="like-info">{{$postID->likes->first()->user->profile->name}} liked this</p></li>
+                    @else
+                        <li><p class="like-info">No one leaved a like yet!</p></li>
+                    @endif
+                </ul>
+                <ul class="social-icons">
+                    @foreach ($postID->socials as $social)
+                        <li><a href="{{$social->link}}"><i class="fab fa-{{$social->name}}"></i></a></li>
+                    @endforeach
+                </ul>
            </div>
            <div class="navigation-area">
               <div class="row">
@@ -142,7 +133,7 @@
            </div>
         </div>
 
-        <div class="comments-area">
+        <div class="comments-area" id="comments">
            <h4>{{$postID->comments->count()}} Comments</h4>
 
            @foreach ($postID->comments as $comment)
@@ -161,10 +152,13 @@
                             <h5>
                                 <a href="/profile/{{$comment->user->id}}">{{$comment->user->profile->name}}</a>
                             </h5>
-                                <p style="white-space: pre-wrap;" class="date">{{$comment->created_at}}</p>
+                                <p style="white-space: pre-wrap;" class="date">{{$postID->created_at->day}}  {{date("F", mktime(0, 0, 0, $postID->created_at->month, 1))}} {{$postID->created_at->year}} - {{$postID->created_at->hour}}:{{$postID->created_at->minute}}</p>
                             </div>
                             <div class="reply-btn">
-                                <a style="cursor: pointer" onclick="deleteComment({{$comment->id}})" class="btn-reply text-uppercase">delete</a>
+                                <a style="cursor: pointer" onclick="deleteComment({{$comment->id}}, '{{csrf_token()}}')" class="btn-reply text-uppercase">delete</a>
+                            </div>
+                            <div class="reply-btn">
+                                <a style="cursor: pointer" onclick="deleteComment({{$comment->id}})" class="btn-reply text-uppercase">reply</a>
                             </div>
                         </div>
                     </div>

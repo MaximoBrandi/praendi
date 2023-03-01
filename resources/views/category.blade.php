@@ -22,9 +22,9 @@
                             <p>That dominion stars lights dominion divide years for fourth have don't stars is that
                                 he earth it first without heaven in place seed it second morning saying.</p>
                             <ul class="blog-info-link">
-                                <li><a href="#"><i class="fa fa-user"></i> {{$post->category}}</a></li>
-                                <li><a href="#"><i class="fa fa-user"></i> {{$post->user->name}}</a></li>
-                                <li><a href="#"><i class="fa fa-comments"></i> {{$post->comments->count()}} Comments</a></li>
+                                <li><a href="/category/{{$post->category}}"><i class="fa fa-user"></i> {{$post->category}}</a></li>
+                                <li><a href="/profile/{{$post->user->id}}"><i class="fa fa-user"></i> {{$post->user->profile->name}}</a></li>
+                                <li><a href="javascript:;"><i class="fa fa-comments"></i> {{$post->comments->count()}} Comments</a></li>
                             </ul>
                         </div>
                     </article>
@@ -34,9 +34,8 @@
                     <article class="blog_item">
                         <div class="blog_item_img">
                             <img class="card-img rounded-0" src="{{$post->image}}" width="750px" height="375px" alt="">
-                            <a href="/post/{{$post->id}}" class="blog_item_date">
-                                <h3>{{$post->created_at->day}}</h3>
-                                <p>{{date("F", mktime(0, 0, 0, $post->created_at->month, 1))}}</p>
+                            <a href="/category/{{$post->category}}" class="blog_item_date">
+                                <h3>{{$post->category}}</h3>
                             </a>
                         </div>
 
@@ -47,9 +46,9 @@
                             <p>That dominion stars lights dominion divide years for fourth have don't stars is that
                                 he earth it first without heaven in place seed it second morning saying.</p>
                             <ul class="blog-info-link">
-                                <li><a href="#"><i class="fa fa-user"></i> {{$post->category}}</a></li>
-                                <li><a href="#"><i class="fa fa-user"></i> {{$post->user->name}}</a></li>
-                                <li><a href="#"><i class="fa fa-comments"></i> {{$post->comments->count()}} Comments</a></li>
+                                <li><a href="javascript:;"><i class="fa fa-calendar"></i> {{$post->created_at->day}}  {{date("F", mktime(0, 0, 0, $post->created_at->month, 1))}} {{$post->created_at->year}}</a></li>
+                                <li><a href="/profile/{{$post->user->id}}"><i class="fa fa-user"></i> {{$post->user->profile->name}}</a></li>
+                                <li><a href="javascript:;"><i class="fa fa-comments"></i> {{$post->comments->count()}} Comments</a></li>
                             </ul>
                         </div>
                     </article>

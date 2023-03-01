@@ -20,9 +20,9 @@
                             <p>That dominion stars lights dominion divide years for fourth have don't stars is that
                                 he earth it first without heaven in place seed it second morning saying.</p>
                             <ul class="blog-info-link">
-                                <li><a href="#"><i class="fa fa-user"></i> <?php echo e($post->category); ?></a></li>
-                                <li><a href="#"><i class="fa fa-user"></i> <?php echo e($post->user->name); ?></a></li>
-                                <li><a href="#"><i class="fa fa-comments"></i> <?php echo e($post->comments->count()); ?> Comments</a></li>
+                                <li><a href="/category/<?php echo e($post->category); ?>"><i class="fa fa-user"></i> <?php echo e($post->category); ?></a></li>
+                                <li><a href="/profile/<?php echo e($post->user->id); ?>"><i class="fa fa-user"></i> <?php echo e($post->user->profile->name); ?></a></li>
+                                <li><a href="javascript:;"><i class="fa fa-comments"></i> <?php echo e($post->comments->count()); ?> Comments</a></li>
                             </ul>
                         </div>
                     </article>
@@ -32,9 +32,8 @@
                     <article class="blog_item">
                         <div class="blog_item_img">
                             <img class="card-img rounded-0" src="<?php echo e($post->image); ?>" width="750px" height="375px" alt="">
-                            <a href="/post/<?php echo e($post->id); ?>" class="blog_item_date">
-                                <h3><?php echo e($post->created_at->day); ?></h3>
-                                <p><?php echo e(date("F", mktime(0, 0, 0, $post->created_at->month, 1))); ?></p>
+                            <a href="/category/<?php echo e($post->category); ?>" class="blog_item_date">
+                                <h3><?php echo e($post->category); ?></h3>
                             </a>
                         </div>
 
@@ -45,9 +44,9 @@
                             <p>That dominion stars lights dominion divide years for fourth have don't stars is that
                                 he earth it first without heaven in place seed it second morning saying.</p>
                             <ul class="blog-info-link">
-                                <li><a href="#"><i class="fa fa-user"></i> <?php echo e($post->category); ?></a></li>
-                                <li><a href="#"><i class="fa fa-user"></i> <?php echo e($post->user->name); ?></a></li>
-                                <li><a href="#"><i class="fa fa-comments"></i> <?php echo e($post->comments->count()); ?> Comments</a></li>
+                                <li><a href="javascript:;"><i class="fa fa-calendar"></i> <?php echo e($post->created_at->day); ?>  <?php echo e(date("F", mktime(0, 0, 0, $post->created_at->month, 1))); ?> <?php echo e($post->created_at->year); ?></a></li>
+                                <li><a href="/profile/<?php echo e($post->user->id); ?>"><i class="fa fa-user"></i> <?php echo e($post->user->profile->name); ?></a></li>
+                                <li><a href="javascript:;"><i class="fa fa-comments"></i> <?php echo e($post->comments->count()); ?> Comments</a></li>
                             </ul>
                         </div>
                     </article>
