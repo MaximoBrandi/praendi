@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Social;
 
 class PostSeeder extends Seeder
 {
@@ -16,7 +17,9 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        Post::factory()->count(20)->create();
+        Post::factory()
+            ->has(Social::factory()->count(4))
+            ->count(20)->create();
 
         User::factory()->count(15)->create();
     }

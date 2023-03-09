@@ -25,22 +25,6 @@ class Profile extends Model
         'pfp'
     ];
 
-    protected function social(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => json_decode($value, true),
-            set: fn ($value) => json_encode($value),
-        );
-    }
-
-    protected function contact(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => json_decode($value, true),
-            set: fn ($value) => json_encode($value),
-        );
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -48,6 +32,10 @@ class Profile extends Model
 
     public function follows(){
         return $this->hasMany(Follow::class);
+    }
+
+    public function social(){
+        return $this->hasMany(Social::class);
     }
 
     public function followers(){

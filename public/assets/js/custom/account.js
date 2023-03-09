@@ -16,7 +16,7 @@ async function followAccount(token, id) {
     }
 }
 
-async function newsletter(token, email) {
+async function newsletter(token, email, debug = null) {
     if (email !== null) {
         response = await fetch('/newsletter-create', {
             method: 'POST',
@@ -31,7 +31,11 @@ async function newsletter(token, email) {
             const data = await response.text();
 
             if (data) {
-                console.log(data);
+                if (debug) {
+                    console.log(data);
+                }else{
+                    location.reload();
+                }
             }
     }
 }

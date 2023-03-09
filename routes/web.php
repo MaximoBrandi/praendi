@@ -39,6 +39,8 @@ Route::controller(Controller::class)->group(function () {
 
     Route::post('/profile', 'createprofile');
 
+    Route::post('/newsletter-create', 'newsletter')->name('newsletter');
+
     Route::post('/profile/update', 'updateprofile')->name('updateprofile');
 
     Route::get('/login', 'login')->name('login');

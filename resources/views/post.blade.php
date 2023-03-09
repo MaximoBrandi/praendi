@@ -70,7 +70,7 @@
                 </ul>
                 <ul class="social-icons">
                     @foreach ($postID->socials as $social)
-                        <li><a href="{{$social->link}}"><i class="fab fa-{{$social->name}}"></i></a></li>
+                        <li><a href="{{$social->url}}"><i class="fab fa-{{$social->name}}"></i></a></li>
                     @endforeach
                 </ul>
            </div>

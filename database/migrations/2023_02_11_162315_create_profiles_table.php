@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('banner')->nullable();
             $table->string('pfp')->default('/storage/photos/profile_pictures/default.jpg');
             $table->string('bio')->nullable();
-            $table->json('social')->nullable();
-            $table->json('contact')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

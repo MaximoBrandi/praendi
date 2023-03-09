@@ -24,13 +24,16 @@ class Post extends Model
         return $this->hasMany(Like::class);
     }
 
+    public function socials(){
+        return $this->hasMany(Social::class);
+    }
+
     public function user_liked(){
         if ($this->likes->where('user_id', Auth::user()->id)->first()) {
             return $this->likes->where('user_id', Auth::user()->id)->first();
         } else {
             return null;
         }
-
     }
 
     public function incrementReadCount() {
@@ -41,4 +44,5 @@ class Post extends Model
     protected $casts = [
         'multimedia' => 'boolean',
     ];
+
 }

@@ -17,7 +17,7 @@
                                                 <div class="trend-top-cap">
                                                     <span class="bgr" data-animation="fadeInUp" data-delay=".2s" data-duration="1000ms"><?php echo e($post->category); ?></span>
                                                     <h2><a href="/post/<?php echo e($post->id); ?>" data-animation="fadeInUp" data-delay=".4s" data-duration="1000ms"><?php echo e($post->title); ?></a></h2>
-                                                    <p data-animation="fadeInUp" data-delay=".6s" data-duration="1000ms">by <?php echo e($post->user->name); ?>   -   <?php echo e($post->created_at); ?></p>
+                                                    <p data-animation="fadeInUp" data-delay=".6s" data-duration="1000ms"><?php echo e($post->user->profile->name); ?>   -   <?php echo e($post->created_at->day); ?>  <?php echo e(date("F", mktime(0, 0, 0, $post->created_at->month, 1))); ?> <?php echo e($post->created_at->year); ?> </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -42,7 +42,7 @@
                                                 <div class="trend-top-cap trend-top-cap2">
                                                     <span class="bgb"><?php echo e($posts->where('category', 'qui')->sortByDesc('name')->first()->category); ?></span>
                                                     <h2><a href="/post/<?php echo e($posts->where('category', 'qui')->sortByDesc('name')->first()->id); ?>"><?php echo e($posts->where('category', 'qui')->sortByDesc('name')->first()->title); ?></a></h2>
-                                                    <p>by <?php echo e($posts->where('category', 'qui')->sortByDesc('name')->first()->user->name); ?>   -   <?php echo e($posts->where('category', 'qui')->sortByDesc('name')->first()->created_at); ?></p>
+                                                    <p><?php echo e($posts->where('category', 'qui')->sortByDesc('name')->first()->user->profile->name); ?> -<?php echo e($posts->where('category', 'qui')->sortByDesc('name')->first()->created_at->day); ?>  <?php echo e(date("F", mktime(0, 0, 0, $posts->where('category', 'qui')->sortByDesc('name')->first()->created_at->month, 1))); ?> <?php echo e($posts->where('category', 'qui')->sortByDesc('name')->first()->created_at->year); ?></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -55,7 +55,7 @@
                                                 <div class="trend-top-cap trend-top-cap2">
                                                     <span class="bgg"><?php echo e($posts->sortByDesc('reads')->first()->category); ?></span>
                                                     <h2><a href="/post/<?php echo e($posts->sortByDesc('reads')->first()->id); ?>"><?php echo e($posts->sortByDesc('reads')->first()->title); ?></a></h2>
-                                                    <p>by <?php echo e($posts->sortByDesc('reads')->first()->user->name); ?>   -   <?php echo e($posts->sortByDesc('reads')->first()->created_at); ?></p>
+                                                    <p><?php echo e($posts->sortByDesc('reads')->first()->user->profile->name); ?> - <?php echo e($posts->sortByDesc('reads')->first()->created_at->day); ?>  <?php echo e(date("F", mktime(0, 0, 0, $posts->sortByDesc('reads')->first()->created_at->month, 1))); ?> <?php echo e($posts->sortByDesc('reads')->first()->created_at->year); ?></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -72,7 +72,7 @@
                                                 <div class="trend-top-cap trend-top-cap2">
                                                     <span class="bgg"><?php echo e($posts->sortByDesc('reads')->first()->category); ?></span>
                                                     <h2><a href="/post/<?php echo e($posts->sortByDesc('reads')->first()->id); ?>"><?php echo e($posts->sortByDesc('reads')->first()->title); ?></a></h2>
-                                                    <p>by <?php echo e($posts->sortByDesc('reads')->first()->user->name); ?>   -   <?php echo e($posts->sortByDesc('reads')->first()->created_at); ?></p>
+                                                    <p><?php echo e($posts->sortByDesc('reads')->first()->user->profile->name); ?> - <?php echo e($posts->sortByDesc('reads')->first()->created_at->day); ?>  <?php echo e(date("F", mktime(0, 0, 0, $posts->sortByDesc('reads')->first()->created_at->month, 1))); ?> <?php echo e($posts->sortByDesc('reads')->first()->created_at->year); ?></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -109,7 +109,7 @@
                                         </div>
                                         <div class="what-cap">
                                             <h4><a href="/post/<?php echo e($post->id); ?>" > <h4><a href="/post/<?php echo e($post->id); ?>"><?php echo e($post->title); ?></a></h4></a></h4>
-                                            <P><?php echo e($post->created_at); ?></P>
+                                            <P><?php echo e($post->user->profile->name); ?></P>
                                             <a class="popup-video btn-icon" href="/post/<?php echo e($post->id); ?>"><span class="flaticon-play-button"></span></a>
 
                                         </div>
@@ -142,7 +142,7 @@
                                                     </div>
                                                     <div class="weekly3-caption">
                                                         <h4><a href="/post/<?php echo e($post->id); ?>"><?php echo e($post->title); ?></a></h4>
-                                                        <p><?php echo e($post->created_at); ?></p>
+                                                        <p><?php echo e($post->user->profile->name); ?> | <?php echo e($post->created_at->day); ?>  <?php echo e(date("F", mktime(0, 0, 0, $post->created_at->month, 1))); ?> <?php echo e($post->created_at->year); ?></p>
                                                     </div>
                                                 </div>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -168,7 +168,7 @@
             </div>
             <div class="whats-right-cap">
                 <h4><a href="/post/<?php echo e($post->id); ?>"><?php echo e($post->title); ?></a></h4>
-                <p><?php echo e($post->user->title); ?>  |  <?php echo e($post->created_at); ?></p>
+                <p><?php echo e($post->user->profile->name); ?>  |  <?php echo e($post->created_at->day); ?>  <?php echo e(date("F", mktime(0, 0, 0, $post->created_at->month, 1))); ?> <?php echo e($post->created_at->year); ?></p>
             </div>
         </div>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

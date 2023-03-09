@@ -141,7 +141,7 @@
                             </div>
                         </div>
                     </div>
-                    @if ($profile->user->posts->take(3)->count() < 4)
+                    @if ($profile->user->posts->count() < 4)
                     <div class="col-12 mt-4">
                         <div class="mb-5 ps-3">
                             <div class="row">
@@ -156,7 +156,7 @@
                             <div class="row">
 
                                 @if(!$profile->user->posts->isEmpty())
-                                    @foreach ($profile->user->posts->take(3) as $post)
+                                    @foreach ($profile->user->posts as $post)
                                         <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                                             <div class="card card-blog card-plain">
                                                 <div class="card-header p-0 mt-n4 mx-3">

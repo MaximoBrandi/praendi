@@ -60,14 +60,12 @@
                         <h4 class="widget_title">Newsletter</h4>
 
                         <form method="post" action="{{route('category')}}">
-                            @csrf
                             <div class="form-group">
                                 <input name="email" id="email-input" type="email" class="form-control" onfocus="this.placeholder = ''"
                                     onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
                             </div>
-                            <button onclick="newsletter('{{csrf_token()}}', (document.getElementById('email-input').value));" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                type="submit">Subscribe</button>
                         </form>
+                        <button onclick="newsletter('{{csrf_token()}}', (document.getElementById('email-input').value), true);" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn">Subscribe</button>
                     </aside>
                 </div>
             </div>
