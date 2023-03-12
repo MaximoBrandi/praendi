@@ -15,6 +15,7 @@ use App\Models\Post;
 use App\Models\Comment;
 use App\Models\Follow;
 use App\Models\Like;
+use App\Models\reply;
 use App\Models\Newsletter;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Storage;
@@ -292,10 +293,18 @@ class Controller extends BaseController
     public function comment(Request $request, $id){
         $validate = $request->validate([
             'comment' => ['required', 'string', 'max:60'],
+            'reply_id' => ['nullable', 'integer']
         ]);
 
         if($validate){
-            if($request->comment){
+            if ($request->reply_id) {
+                reply::create([
+                    'user_id' => Auth::user()->id,
+                    'post_id' => $id,
+                    'comment_id' => $request->reply_id,
+                    'comment' => filter_var($request->comment, FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH),
+                ]);
+            } else if($request->comment){
                 Comment::create([
                     'user_id' => Auth::user()->id,
                     'post_id' => $id,

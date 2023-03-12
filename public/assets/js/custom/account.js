@@ -16,6 +16,11 @@ async function followAccount(token, id) {
     }
 }
 
+function replycomment(id) {
+    document.getElementById("reply_id").value = id
+    document.getElementById("reply-text").innerHTML = 'Leave a reply to '+(document.getElementById("comment-"+id).innerHTML)
+}
+
 async function newsletter(token, email, debug = null) {
     if (email !== null) {
         response = await fetch('/newsletter-create', {

@@ -137,46 +137,76 @@
            <h4>{{$postID->comments->count()}} Comments</h4>
 
            @foreach ($postID->comments as $comment)
-            <div class="comment-list">
-                <div class="single-comment justify-content-between d-flex">
-                <div class="user justify-content-between d-flex">
-                    <div class="thumb">
-                        <img src="{{$comment->user->profile->pfp}}" alt="">
-                    </div>
-                    <div class="desc">
-                        <p class="comment">
-                            {{$comment->comment}}
-                        </p>
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex align-items-center">
-                            <h5>
-                                <a href="/profile/{{$comment->user->id}}">{{$comment->user->profile->name}}</a>
-                            </h5>
-                                <p style="white-space: pre-wrap;" class="date">{{$postID->created_at->day}}  {{date("F", mktime(0, 0, 0, $postID->created_at->month, 1))}} {{$postID->created_at->year}} - {{$postID->created_at->hour}}:{{$postID->created_at->minute}}</p>
+                <div class="comment-list">
+                    <div class="single-comment justify-content-between d-flex">
+                        <div class="user justify-content-between d-flex">
+                            <div class="thumb">
+                                <img src="{{$comment->user->profile->pfp}}" alt="">
                             </div>
-                            <div class="reply-btn">
-                                <a style="cursor: pointer" onclick="deleteComment({{$comment->id}}, '{{csrf_token()}}')" class="btn-reply text-uppercase">delete</a>
-                            </div>
-                            <div class="reply-btn">
-                                <a style="cursor: pointer" onclick="deleteComment({{$comment->id}})" class="btn-reply text-uppercase">reply</a>
+                            <div class="desc">
+                                <p class="comment">
+                                    {{$comment->comment}}
+                                </p>
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                    <h5>
+                                        <a href="/profile/{{$comment->user->id}}" id="comment-{{$comment->id}}">{{$comment->user->profile->name}}</a>
+                                    </h5>
+                                        <p style="white-space: pre-wrap;" class="date">{{$postID->created_at->day}}  {{date("F", mktime(0, 0, 0, $postID->created_at->month, 1))}} {{$postID->created_at->year}} - {{$postID->created_at->hour}}:{{$postID->created_at->minute}}</p>
+                                    </div>
+                                    <div class="reply-btn">
+                                        <a style="cursor: pointer" onclick="deleteComment({{$comment->id}}, '{{csrf_token()}}')" class="btn-reply text-uppercase">delete</a>
+                                    </div>
+                                    <div class="reply-btn">
+                                        <a style="cursor: pointer" onclick="replycomment({{$comment->id}})" class="btn-reply text-uppercase">reply</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    @foreach ($comment->reply as $reply)
+                        <div style="margin-left:30px;margin-top:30px;" class="single-comment justify-content-between d-flex">
+                            <div class="user justify-content-between d-flex">
+                                <div class="thumb">
+                                    <img src="{{$reply->user->profile->pfp}}" alt="">
+                                </div>
+                                <div class="desc">
+                                    <span class="col-12"> Replying to {{$reply->user->profile->name}}</span>
+                                    <p class="comment">
+                                        {{$reply->comment}}
+                                    </p>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex align-items-center">
+                                        <h5>
+                                            <a href="/profile/{{$reply->user->id}}" id="comment-{{$reply->id}}">{{$reply->user->profile->name}}</a>
+                                        </h5>
+                                            <p style="white-space: pre-wrap;" class="date">{{$reply->created_at->day}}  {{date("F", mktime(0, 0, 0, $reply->created_at->month, 1))}} {{$reply->created_at->year}} - {{$reply->created_at->hour}}:{{$reply->created_at->minute}}</p>
+                                        </div>
+                                        <div class="reply-btn">
+                                            <a style="cursor: pointer" onclick="deleteComment({{$reply->id}}, '{{csrf_token()}}', 'reply')" class="btn-reply text-uppercase">delete</a>
+                                        </div>
+                                        <div class="reply-btn">
+                                            <a style="cursor: pointer" onclick="replycomment({{$reply->id}}, 'reply')" class="btn-reply text-uppercase">reply</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-                </div>
-            </div>
            @endforeach
 
         </div>
 
         <div class="comment-form">
             @if (Auth::user())
-                <h4>Leave a Reply</h4>
+                <h4 id="reply-text">Leave a reply</h4>
                 <form method="post" class="form-contact comment_form" action="/post/{{$postID->id}}" id="commentForm">
                     @csrf
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
+                                <input type="hidden" id="reply_id" name="reply_id" value="">
                                 <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
                                 placeholder="Write Comment"></textarea>
                             </div>
